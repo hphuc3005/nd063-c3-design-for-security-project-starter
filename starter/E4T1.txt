@@ -1,5 +1,17 @@
 
 
 # Identify 2-3 changes that can be made to our environment to prevent an ssh brute force attack from the internet.
+1) Disable SSH Password Authentication: By disabling SSH password authentication and only allowing SSH key-based authentication, we can significantly reduce the risk of brute force attacks. This ensures that only users with the correct private key can access the instance via SSH.
+
+2) Implement Network Access Controls: Restricting SSH access to specific IP addresses or IP ranges can help prevent unauthorized access. By configuring security groups or network ACLs (Access Control Lists) to allow SSH connections only from trusted sources, we can minimize the attack surface and reduce the risk of brute force attacks.
+
+3) Implement Intrusion Detection and Prevention Systems (IDS/IPS): Deploying an IDS/IPS solution can help detect and prevent brute force attacks. These systems monitor network traffic and can identify patterns or anomalies associated with brute force attempts. They can then take proactive measures to block or mitigate such attacks.
 
 # Neither instance should have had access to the secret recipes bucket, in the even that instance API credentials were compromised how could we have prevented access to sensitive data.
+To prevent access to the secret recipes bucket even if API credentials are compromised, we can implement the following measures:
+
+1) Implement Fine-Grained IAM Policies: Ensure that the IAM policies associated with the instances or services accessing the secret recipes bucket are properly configured. Use the principle of least privilege and grant only the necessary permissions to access the bucket. This way, even if API credentials are compromised, the attacker will have limited access to sensitive data.
+
+2) Enable Server-Side Encryption: Enable server-side encryption for the secret recipes bucket. This ensures that the data stored in the bucket is encrypted at rest. Even if an unauthorized user gains access to the bucket, they won't be able to read the encrypted data without the appropriate encryption keys.
+
+3) Implement Access Logging and Monitoring: Enable access logging for the secret recipes bucket and regularly monitor the logs for any suspicious activities. This can help we detect unauthorized access attempts and take appropriate actions to prevent data breaches.

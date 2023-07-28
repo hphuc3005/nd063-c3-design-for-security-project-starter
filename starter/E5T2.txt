@@ -1,13 +1,19 @@
 # Identify tools that will allow you to do the following:
 
 ## Scan infrastructure as code templates
+AWS CloudFormation Guard: This tool allows us to define and enforce best practices for AWS CloudFormation templates. It helps us catch security and compliance issues before deploying our infrastructure.
 
 ### Example vulnerability
+The use of insecure security group rules that allow unrestricted access.
 
 ##Scan AMI’s or containers for OS vulnerabilities
+Amazon Inspector: Amazon Inspector is an automated security assessment service that helps we identify vulnerabilities in our EC2 instances and applications. It provides a range of pre-defined rules packages that can be used to scan for common vulnerabilities.
 
 ### Example vulnerability
+The presence of outdated software versions with known security vulnerabilities.
 
 ##Scan an AWS environment for cloud configuration vulnerabilities
+AWS Security Hub: AWS Security Hub provides a comprehensive view of our security posture in AWS. It aggregates and prioritizes security findings from various AWS services, including Amazon GuardDuty and AWS Config. It can help us identify misconfigurations and compliance violations across our AWS environment.
 
 ### Example vulnerability
+The lack of encryption for S3 buckets containing sensitive data.

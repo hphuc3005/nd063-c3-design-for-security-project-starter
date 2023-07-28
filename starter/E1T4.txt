@@ -1,5 +1,28 @@
 Based on the architecture diagram, and the steps you have taken so far to upload data and access the application web service, identify at least 2 obvious poor practices as it relates to security.  Include justification.
 
-# Poor practice 1
+- First, the hacker can connect to AttackInstance with SSH by its public IP, then in this instance, he can retrieve any object from the secret bucket "cand-c3-secret-recipes-770319903351". This vulnerability is due to the secret bucket has not been set up policy.
+=> I have to set up a bucket policy for the secret bucket, so only privileged business users can access this bucket and the others are denied. Example:
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowPrivilegedUsers",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::770319903351:user/privileged-user"
+      },
+      "Action": "s3:*",
+      "Resource": "arn:aws:s3:::cand-c3-secret-recipes-770319903351/*"
+    },
+    {
+      "Sid": "DenyOthers",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": "s3:*",
+      "Resource": "arn:aws:s3:::cand-c3-secret-recipes-770319903351/*"
+    }
+  ]
+}
 
-# Poor practice 2
+- Second, once the hacker retrieves the objects in the secret bucket, he can see the entire content of these objects. This vulnerability is due to the fact that I did not set up the encryption mechanism for my secret bucket.
+=> To protect my secret data in S3, I should set up versioning and an encryption mechanism, for the most simple, I can use server-side encryption with Amazon S3 managed keys (SSE-S3).

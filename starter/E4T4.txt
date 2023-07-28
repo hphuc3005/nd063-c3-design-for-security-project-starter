@@ -1,8 +1,27 @@
 
 # What additional architectural change can be made to reduce the internet facing attack surface of the web application instance.
+To reduce the internet-facing attack surface of the web application instance, we can consider implementing the following additional architectural changes:
+
+1) Implement a Web Application Firewall (WAF): A Web Application Firewall can be used to filter and monitor HTTP traffic to the web application. It helps to protect against common web application attacks such as SQL injection, cross-site scripting (XSS), and more. WAF can be configured with rules to block or allow specific types of traffic, providing an extra layer of security.
+
+2) Use a Bastion Host: A bastion host, also known as a jump server, is an intermediary server that acts as a secure gateway to access the web application instance. By using a bastion host, we can restrict direct SSH access to the web application instance from the internet. Instead, users would first connect to the bastion host and then use it as a gateway to access the web application instance.
+
+3) Update Network Access Control Lists (ACLs): Network ACLs can be used to control inbound and outbound traffic at the subnet level. By configuring ACLs, we can define specific rules to allow or deny traffic to and from the web application instance. This provides an additional layer of network-level security.
 
 # Assuming the IAM permissions for the S3 bucket are still insecure, would creating VPC private endpoints for S3 prevent the unauthorized access to the secrets bucket.
+Yes, creating VPC private endpoints for Amazon S3 can help prevent unauthorized access to the secrets bucket, even if the IAM permissions for the bucket are insecure.
+By using VPC private endpoints for S3, we can ensure that the communication between our EC2 instances in the VPC and the S3 bucket is secure and isolated from the public internet. This helps to mitigate the risk of unauthorized access to the secrets bucket, even if the IAM permissions are misconfigured.
 
 # Will applying default encryption setting to the s3 buckets encrypt the data that already exists?
+No, applying the default encryption setting to S3 buckets will not automatically encrypt the data that already exists. The default encryption setting only applies to new objects uploaded to the bucket after the encryption setting is enabled.
 
 # What would happen if the original cloud formation templates are applied to this environment.
+If the original CloudFormation templates are applied to the environment without any modifications or changes, the outcome will depend on the configurations and settings defined in those templates. Example: 
+
+- Default Configuration: If the original CloudFormation templates are designed to provide a default configuration for the environment, applying them will set up the infrastructure and services according to the template specifications. This means that the security hardening measures implemented manually, such as disabling SSH password login, updating IAM policies, and applying default encryption to S3 buckets, may not be included in the original templates. Therefore, the environment may not have the desired security measures in place.
+
+- Incomplete Security: If the original CloudFormation templates include some security configurations but not all of the security hardening measures implemented manually, the environment may have partial security measures in place. This could leave certain aspects vulnerable to attacks or unauthorized access.
+
+- Misconfigurations: If the original CloudFormation templates contain misconfigurations or insecure settings, applying them as-is could result in an environment that is not adequately secured. This could potentially expose sensitive data or make the environment susceptible to attacks.
+
+In any case, it is important to carefully review the original CloudFormation templates and assess whether they include the necessary security hardening measures. If the templates do not include the desired security configurations, modifications will be required to incorporate the changes made manually.

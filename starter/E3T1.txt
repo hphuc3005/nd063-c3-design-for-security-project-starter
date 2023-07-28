@@ -1,3 +1,14 @@
 # Describe GuardDuty findings that were detected related to the brute force attack
+Due to GuardDuty does not detect anything. I can not answer this question.
 
 # Research the AWS Guard Duty documentation page and explain how GuardDuty may have detected this attack - i.e. what was its source of information.
+GuardDuty detects attacks and suspicious activities by analyzing various data sources within your AWS environment. It leverages machine learning algorithms and threat intelligence feeds to identify potential threats.
+In the case of a brute force attack, GuardDuty may have detected it based on the following sources of information:
+
+1) VPC Flow Logs: GuardDuty analyzes VPC Flow Logs, which capture information about the network traffic flowing in and out of your VPC. It looks for patterns and anomalies in the network traffic that could indicate a brute force attack, such as a high number of failed login attempts from a single IP address.
+
+2) DNS Logs: GuardDuty also analyzes DNS logs to identify suspicious DNS activity. In the case of a brute force attack, it may detect unusual DNS queries associated with the attack, such as repeated queries for different usernames or password combinations.
+
+3) AWS CloudTrail Logs: GuardDuty examines CloudTrail logs, which provide a record of API activity in your AWS account. It looks for suspicious API calls related to authentication and authorization, such as multiple failed login attempts or repeated requests for SSH access.
+
+By correlating information from these different data sources and applying machine learning algorithms, GuardDuty can detect patterns and anomalies that indicate a brute force attack. It provides alerts and findings to help you take appropriate actions to mitigate the attack.

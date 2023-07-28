@@ -1,3 +1,24 @@
-Research and analyze which of the vulnerabilities appear to be related to the code that was deployed for the environment in this project.
+The vulnerabilities appear to be related to the code and recommendations on how to remediate these vulnerabilities:
 
-Bonus - provide recommendations on how to remediate the vulnerabilities.
+1) MFA has not been enabled for the root user.
+=> Enable MFA for the root user.
+The root user has full administrative privileges in an AWS account, so enabling MFA for the root user helps prevent unauthorized access and potential account hijacking. It adds an extra barrier for attackers, as they would need physical possession of the MFA device or knowledge of the MFA code to gain access.
+
+2) Missing encryption on EBS volumes and on secret S3 buckets.
+=> Configure encryption for EBS volumes that are in an attached state and S3 buckets. Encrypting EBS volumes and S3 buckets helps protect sensitive data from unauthorized access, even if someone gains access to the underlying storage infrastructure. It ensures that the data remains confidential and cannot be easily accessed or read by unauthorized individuals or malicious actors.
+
+3) Insecure communication: using HTTP protocol to communicate with the internet
+=> Should use secure protocols (e.g., HTTPS) and ensure properly validates and sanitizes input and output data. Enabling HTTPS ensures that the communication between our website or application and the internet is encrypted, providing confidentiality and integrity of the data transmitted. It prevents eavesdropping, tampering, and man-in-the-middle attacks, which are common risks associated with using the insecure HTTP protocol.
+
+4) Inadequate access controls: allow ingress from 0.0.0.0/0
+=> Allowing ingress from 0.0.0.0/0 means that any IP address can access the resource, which is highly insecure and increases the risk of unauthorized access or attacks. By restricting access to specific IP addresses or ranges, we can ensure that only authorized entities can access the resource.
+To remediate this vulnerability, we should:
+	+ Identify the security group or network ACL (Access Control List) that has this configuration.
+	+ Update the security group or network ACL to restrict access only to the necessary IP addresses or ranges.
+	+ Remove the rule that allows ingress from 0.0.0.0/0.
+	+ Add specific rules to allow access from trusted IP addresses or ranges that require access to the resource.
+
+5) Error handling and logging: CloudTrail, and VPC Flow logs have not been enabled.
+=> Enable CloudTrail and VPC Flow log.
+- Enabling CloudTrail allows us to capture detailed logs of API activity and events within your AWS account. These logs provide valuable information for security analysis, auditing, compliance, and troubleshooting purposes. By enabling CloudTrail, we can track and monitor changes made to our AWS resources, detect unauthorized activity, and investigate security incidents.
+- Enabling VPC Flow Logs allows us to capture information about the IP traffic going to and from network interfaces in our VPC. This includes details such as source and destination IP addresses, ports, protocols, and the number of bytes and packets transferred. By enabling VPC Flow Logs, we can gain visibility into the network traffic within our VPC, detect unusual or suspicious activity, and troubleshoot network issues.
